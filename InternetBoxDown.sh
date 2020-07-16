@@ -10,7 +10,7 @@ test_Internet()
     # else
     #     exit
     # fi
-    echo "TimeStamp::Download Speed"
+    #echo "TimeStamp::Download Speed"
     FailCount=0
     while true
     do
@@ -18,6 +18,7 @@ test_Internet()
         
         if [ $? -eq 0 ] #Redirects output to null
             then 
+            date
             speedtest --simple
             
             #log()
@@ -30,7 +31,7 @@ test_Internet()
             do 
                 start=date
                 sleep 5m
-
+                print_next_test_time
                 ping_Addr
                 still_down=$?
             done
@@ -38,10 +39,18 @@ test_Internet()
            # log("Internet outage from ${start} to ${end}")
 
         fi
-        sleep 5m
+        sleep 10m
     done
 
 }
+
+print_next_test_time()
+{
+    #set up so that it gives a time to test
+    echo "Next test in 5-10 minutes"
+
+}
+
 
 log()
 {
